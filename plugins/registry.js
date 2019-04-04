@@ -359,4 +359,25 @@ export default class PluginRegistry {
 
         return id;
     }
+
+    // Register a component to override the right-hand sidebar with a specific type.
+    // type should be named specifically (ie - PLUGINNAME_COMPONENTNAME)
+    // Accepts a string type and a component.
+    // Returns a unique identifier.
+    registerCustomRhsComponent(type, component) {
+        const id = generateId();
+
+        store.dispatch({
+            type: ActionTypes.RECEIVED_PLUGIN_CUSTOM_RHS_COMPONENT,
+            name: type,
+            data: {
+                id,
+                pluginId: this.id,
+                type,
+                component,
+            },
+        });
+
+        return id;
+    }
 }

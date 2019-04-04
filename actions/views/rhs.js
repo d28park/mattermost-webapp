@@ -279,3 +279,10 @@ export function toggleRhsExpanded() {
 export function selectPost(post) {
     return {type: ActionTypes.SELECT_POST, postId: post.root_id || post.id, channelId: post.channel_id};
 }
+
+export function openCustomRightHandSide(customData) {
+    return {
+        type: ActionTypes.CUSTOM_RHS,
+        data: customData,
+    };
+}

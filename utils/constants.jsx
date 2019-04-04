@@ -97,6 +97,7 @@ export const ActionTypes = keyMirror({
     SELECT_POST: null,
     INCREASE_POST_VISIBILITY: null,
     LOADING_POSTS: null,
+    CUSTOM_RHS: null,
 
     UPDATE_RHS_STATE: null,
     UPDATE_RHS_SEARCH_TERMS: null,
@@ -139,6 +140,8 @@ export const ActionTypes = keyMirror({
     REMOVED_PLUGIN_COMPONENT: null,
     RECEIVED_PLUGIN_POST_COMPONENT: null,
     REMOVED_PLUGIN_POST_COMPONENT: null,
+    RECEIVED_PLUGIN_CUSTOM_RHS_COMPONENT: null,
+    REMOVED_PLUGIN_CUSTOM_RHS_COMPONENT: null,
     RECEIVED_WEBAPP_PLUGINS: null,
     RECEIVED_WEBAPP_PLUGIN: null,
     REMOVED_WEBAPP_PLUGIN: null,

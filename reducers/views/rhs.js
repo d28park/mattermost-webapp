@@ -36,6 +36,17 @@ function selectedChannelId(state = '', action) {
     }
 }
 
+function customRhsData(state = '', action) {
+    switch (action.type) {
+    case ActionTypes.CUSTOM_RHS:
+        return action.data;
+    case ActionTypes.UPDATE_RHS_STATE:
+        return '';
+    default:
+        return state;
+    }
+}
+
 function previousRhsState(state = null, action) {
     switch (action.type) {
     case ActionTypes.SELECT_POST:
@@ -53,6 +64,8 @@ function rhsState(state = null, action) {
     case ActionTypes.UPDATE_RHS_STATE:
         return action.state;
     case ActionTypes.SELECT_POST:
+        return null;
+    case ActionTypes.CUSTOM_RHS:
         return null;
     default:
         return state;
@@ -107,6 +120,8 @@ function isSidebarOpen(state = false, action) {
         return Boolean(action.state);
     case ActionTypes.SELECT_POST:
         return Boolean(action.postId);
+    case ActionTypes.CUSTOM_RHS:
+        return Boolean(action.data);
     case ActionTypes.TOGGLE_RHS_MENU:
         return false;
     case ActionTypes.OPEN_RHS_MENU:
@@ -132,6 +147,8 @@ function isSidebarExpanded(state = false, action) {
         return action.state ? state : false;
     case ActionTypes.SELECT_POST:
         return action.postId ? state : false;
+    case ActionTypes.CUSTOM_RHS:
+        return action.data ? state : false;
     case ActionTypes.TOGGLE_RHS_MENU:
         return false;
     case ActionTypes.OPEN_RHS_MENU:
@@ -169,6 +186,7 @@ function isMenuOpen(state = false, action) {
 export default combineReducers({
     selectedPostId,
     selectedChannelId,
+    customRhsData,
     previousRhsState,
     rhsState,
     searchTerms,

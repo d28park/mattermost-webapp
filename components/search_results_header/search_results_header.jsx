@@ -14,6 +14,8 @@ export default class SearchResultsHeader extends React.Component {
         isFlaggedPosts: PropTypes.bool,
         isPinnedPosts: PropTypes.bool,
         channelDisplayName: PropTypes.string.isRequired,
+        customHeader: PropTypes.string,
+        customHeaderId: PropTypes.string,
         actions: PropTypes.shape({
             closeRightHandSide: PropTypes.func,
             toggleRhsExpanded: PropTypes.func.isRequired,
@@ -76,6 +78,17 @@ export default class SearchResultsHeader extends React.Component {
                     defaultMessage='Pinned posts in {channelDisplayName}'
                     values={{
                         channelDisplayName: this.props.channelDisplayName,
+                    }}
+                />
+            );
+        } else if (this.props.customHeader || this.props.customHeaderId) {
+            title = (
+                <FormattedMessage
+                    id='{customHeaderId}'
+                    defaultMessage='{customHeader}'
+                    values={{
+                        customHeader: this.props.customHeader,
+                        customHeaderId: this.props.customHeaderId,
                     }}
                 />
             );

@@ -16,6 +16,10 @@ export function getSelectedChannelId(state) {
     return state.views.rhs.selectedChannelId;
 }
 
+export function getCustomRhsData(state) {
+    return state.views.rhs.customRhsData;
+}
+
 function getRealSelectedPost(state) {
     return state.entities.posts.posts[getSelectedPostId(state)];
 }

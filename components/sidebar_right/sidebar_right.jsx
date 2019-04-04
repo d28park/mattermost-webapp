@@ -12,15 +12,18 @@ import FileUploadOverlay from 'components/file_upload_overlay.jsx';
 import RhsThread from 'components/rhs_thread';
 import SearchBar from 'components/search_bar';
 import SearchResults from 'components/search_results';
+import Pluggable from 'plugins/pluggable';
 
 export default class SidebarRight extends React.PureComponent {
     static propTypes = {
         isExpanded: PropTypes.bool.isRequired,
         isOpen: PropTypes.bool.isRequired,
         currentUserId: PropTypes.string.isRequired,
+        customData: PropTypes.object,
         channel: PropTypes.object,
         postRightVisible: PropTypes.bool,
         searchVisible: PropTypes.bool,
+        customRhsVisible: PropTypes.bool,
         isMentionSearch: PropTypes.bool,
         isFlaggedPosts: PropTypes.bool,
         isPinnedPosts: PropTypes.bool,
@@ -32,8 +35,8 @@ export default class SidebarRight extends React.PureComponent {
     };
 
     componentDidUpdate(prevProps) {
-        const wasOpen = prevProps.searchVisible || prevProps.postRightVisible;
-        const isOpen = this.props.searchVisible || this.props.postRightVisible;
+        const wasOpen = prevProps.searchVisible || prevProps.postRightVisible || prevProps.customRhsVisible;
+        const isOpen = this.props.searchVisible || this.props.postRightVisible || this.props.customRhsVisible;
 
         if (!wasOpen && isOpen) {
             trackEvent('ui', 'ui_rhs_opened');
@@ -53,12 +56,14 @@ export default class SidebarRight extends React.PureComponent {
         const {
             channel,
             currentUserId,
+            customData,
             isFlaggedPosts,
             isMentionSearch,
             isPinnedPosts,
             postRightVisible,
             previousRhsState,
             searchVisible,
+            customRhsVisible,
         } = this.props;
 
         let content = null;
@@ -104,6 +109,19 @@ export default class SidebarRight extends React.PureComponent {
                     <RhsThread
                         previousRhsState={previousRhsState}
                         currentUserId={currentUserId}
+                        toggleSize={this.toggleSize}
+                        shrink={this.onShrink}
+                    />
+                </div>
+            );
+        } else if (customRhsVisible) {
+            content = (
+                <div className='post-right__container'>
+                    <div className='search-bar__container channel-header alt'>{searchForm}</div>
+                    <Pluggable
+                        key={'custom_' + customData.name}
+                        pluggableName={customData.name}
+                        data={customData}
                         toggleSize={this.toggleSize}
                         shrink={this.onShrink}
                     />

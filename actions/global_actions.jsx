@@ -23,7 +23,7 @@ import {browserHistory} from 'utils/browser_history';
 import {handleNewPost} from 'actions/post_actions.jsx';
 import {stopPeriodicStatusUpdates} from 'actions/status_actions.jsx';
 import {loadProfilesForSidebar} from 'actions/user_actions.jsx';
-import {closeRightHandSide, closeMenu as closeRhsMenu, updateRhsState} from 'actions/views/rhs';
+import {closeRightHandSide, closeMenu as closeRhsMenu, updateRhsState, openCustomRightHandSide} from 'actions/views/rhs';
 import {clearUserCookie} from 'actions/views/root';
 import {close as closeLhs} from 'actions/views/lhs';
 import * as WebsocketActions from 'actions/websocket_actions.jsx';
@@ -330,4 +330,8 @@ export function reloadIfServerVersionChanged() {
     }
 
     serverVersion = newServerVersion;
+}
+
+export function emitOpenCustomRightHandSide(customData) {
+    dispatch(openCustomRightHandSide(customData));
 }

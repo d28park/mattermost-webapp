@@ -14,6 +14,7 @@ import {
     getRhsState,
     getSelectedPostId,
     getSelectedChannelId,
+    getCustomRhsData,
     getPreviousRhsState,
 } from 'selectors/rhs';
 import {RHSStates} from 'utils/constants.jsx';
@@ -24,6 +25,8 @@ function mapStateToProps(state) {
     const rhsState = getRhsState(state);
 
     const channelId = getSelectedChannelId(state);
+
+    const customRhsData = getCustomRhsData(state);
 
     let channel = null;
     if (channelId) {
@@ -45,8 +48,10 @@ function mapStateToProps(state) {
         isOpen: getIsRhsOpen(state),
         channel,
         currentUserId: getCurrentUserId(state),
+        customData: customRhsData,
         postRightVisible: Boolean(getSelectedPostId(state)),
         searchVisible: Boolean(rhsState),
+        customRhsVisible: Boolean(customRhsData),
         previousRhsState: getPreviousRhsState(state),
         isMentionSearch: rhsState === RHSStates.MENTION,
         isFlaggedPosts: rhsState === RHSStates.FLAG,
